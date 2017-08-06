@@ -1,4 +1,5 @@
-# dmn-decision-tables
+# DMN Decision Tables
 PHP library to programmatically create DMN decision tables.
 
-## work in progress ...
+## Work in progress ...
+Not ready to be used yet.
