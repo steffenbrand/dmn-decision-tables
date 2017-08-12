@@ -19,6 +19,16 @@ class DecisionTableBuilder implements DecisionTableBuilderInterface
     private $id;
 
     /**
+     * @var string
+     */
+    private $hitPolicy;
+
+    /**
+     * @var string
+     */
+    private $collectOperator;
+
+    /**
      * @var Input[]
      */
     private $inputs;
@@ -82,6 +92,42 @@ class DecisionTableBuilder implements DecisionTableBuilderInterface
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHitPolicy()
+    {
+        return $this->hitPolicy;
+    }
+
+    /**
+     * @param $hitPolicy
+     * @return DecisionTableBuilderInterface
+     */
+    public function setHitPolicy($hitPolicy)
+    {
+        $this->hitPolicy = $hitPolicy;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCollectOperator()
+    {
+        return $this->collectOperator;
+    }
+
+    /**
+     * @param $collectOperator
+     * @return DecisionTableBuilderInterface
+     */
+    public function setCollectOperator($collectOperator)
+    {
+        $this->collectOperator = $collectOperator;
         return $this;
     }
 

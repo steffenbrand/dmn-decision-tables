@@ -46,6 +46,28 @@ interface DecisionTableBuilderInterface
     public function setId($id);
 
     /**
+     * @return string
+     */
+    public function getHitPolicy();
+
+    /**
+     * @param $hitPolicy
+     * @return DecisionTableBuilderInterface
+     */
+    public function setHitPolicy($hitPolicy);
+
+    /**
+     * @return string
+     */
+    public function getCollectOperator();
+
+    /**
+     * @param $collectOperator
+     * @return DecisionTableBuilderInterface
+     */
+    public function setCollectOperator($collectOperator);
+
+    /**
      * @return Input[]
      */
     public function getInputs();

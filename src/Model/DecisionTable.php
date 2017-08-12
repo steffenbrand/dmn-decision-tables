@@ -2,6 +2,7 @@
 
 namespace SteffenBrand\DmnDecisionTables\Model;
 
+use SteffenBrand\DmnDecisionTables\Constant\HitPolicy;
 use SteffenBrand\DmnDecisionTables\DecisionTableBuilder;
 use SteffenBrand\DmnDecisionTables\Exception\DmnConversionException;
 
@@ -16,6 +17,16 @@ class DecisionTable implements DmnConvertible
      * @var string
      */
     private $id;
+
+    /**
+     * @var string
+     */
+    private $hitPolicy;
+
+    /**
+     * @var string
+     */
+    private $collectOperator;
 
     /**
      * @var Input[]
@@ -35,13 +46,15 @@ class DecisionTable implements DmnConvertible
     {
         $this->name = $builder->getName();
         $this->id = $builder->getId();
+        $this->hitPolicy = $builder->getHitPolicy();
+        $this->collectOperator = $builder->getCollectOperator();
         $this->inputs = $builder->getInputs();
         $this->outputs = $builder->getOutputs();
     }
 
     /**
      * @return string
-     * @throws \Exception
+     * @throws DmnConversionException
      */
     public function toDMN()
     {
@@ -55,7 +68,7 @@ class DecisionTable implements DmnConvertible
             '<?xml version="1.0" encoding="UTF-8"?>' .
             '<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">' .
                 '<decision id="' . $this->id . '" name="' . $this->name . '">' .
-                    '<decisionTable id="' . uniqid('decisionTable') . '">' .
+                    '<decisionTable id="' . uniqid('decisionTable') . '" ' . $this->getHitPolicy() . '>' .
                         $this->getInputs() .
                         $this->getOutputs() .
                     '</decisionTable>' .
@@ -68,7 +81,7 @@ class DecisionTable implements DmnConvertible
             throw new DmnConversionException($errors);
         }
 
-        return $dom->saveXml();
+        return $dom->saveXML();
     }
 
     /**
@@ -94,6 +107,20 @@ class DecisionTable implements DmnConvertible
 
         foreach ($this->outputs as $output) {
             $xml .= $output->toDMN();
+        }
+
+        return $xml;
+    }
+
+    /**
+     * @return string
+     */
+    private function getHitPolicy()
+    {
+        $xml = 'hitPolicy="' . $this->hitPolicy . '"';
+
+        if (HitPolicy::COLLECT_POLICY === $this->hitPolicy) {
+            $xml .= ' aggregation="' . $this->collectOperator . '"';
         }
 
         return $xml;
