@@ -3,8 +3,8 @@
 namespace SteffenBrand\DmnDecisionTables\Test;
 
 use PHPUnit_Framework_TestCase;
-use SteffenBrand\DmnDecisionTables\DecisionTable;
 use SteffenBrand\DmnDecisionTables\DecisionTableBuilder;
+use SteffenBrand\DmnDecisionTables\Model\DecisionTable;
 
 class DmnDecisionTablesTest extends PHPUnit_Framework_TestCase
 {

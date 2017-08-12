@@ -1,10 +1,11 @@
 <?php
 
-namespace SteffenBrand\DmnDecisionTables;
+namespace SteffenBrand\DmnDecisionTables\Model;
 
+use SteffenBrand\DmnDecisionTables\DecisionTableBuilder;
 use SteffenBrand\DmnDecisionTables\Exception\DmnConversionException;
 
-class DecisionTable
+class DecisionTable implements DmnConvertible
 {
     /**
      * @var string

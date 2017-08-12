@@ -1,8 +1,8 @@
 <?php
 
-namespace SteffenBrand\DmnDecisionTables;
+namespace SteffenBrand\DmnDecisionTables\Model;
 
-class Output
+class Output implements DmnConvertible
 {
     /**
      * @var string

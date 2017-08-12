@@ -2,7 +2,11 @@
 
 namespace SteffenBrand\DmnDecisionTables;
 
-class DecisionTableBuilder
+use SteffenBrand\DmnDecisionTables\Model\DecisionTable;
+use SteffenBrand\DmnDecisionTables\Model\Input;
+use SteffenBrand\DmnDecisionTables\Model\Output;
+
+class DecisionTableBuilder implements DecisionTableBuilderInterface
 {
     /**
      * @var string
@@ -25,43 +29,24 @@ class DecisionTableBuilder
     private $outputs;
 
     /**
-     * @return Input[]
+     * DecisionTableBuilder constructor.
      */
-    public function getInputs()
+    public function __construct() {}
+
+    /**
+     * @return DecisionTable
+     */
+    public function build()
     {
-        return $this->inputs;
+        return new DecisionTable($this);
     }
 
     /**
-     * @param string $label
-     * @param string $name
-     * @param string $type
-     * @return $this
+     * @return DecisionTableBuilder
      */
-    public function addInput($label, $name, $type)
+    public static function getInstance()
     {
-        $this->inputs[] = new Input($label, $name, $type);
-        return $this;
-    }
-
-    /**
-     * @return Output[]
-     */
-    public function getOutputs()
-    {
-        return $this->outputs;
-    }
-
-    /**
-     * @param string $label
-     * @param string $name
-     * @param string $type
-     * @return $this
-     */
-    public function addOutput($label, $name, $type)
-    {
-        $this->outputs[] = new Output($label, $name, $type);
-        return $this;
+        return new DecisionTableBuilder();
     }
 
     /**
@@ -74,7 +59,7 @@ class DecisionTableBuilder
 
     /**
      * @param string $name
-     * @return $this
+     * @return DecisionTableBuilderInterface
      */
     public function setName($name)
     {
@@ -92,7 +77,7 @@ class DecisionTableBuilder
 
     /**
      * @param string $id
-     * @return $this
+     * @return DecisionTableBuilderInterface
      */
     public function setId($id)
     {
@@ -101,18 +86,62 @@ class DecisionTableBuilder
     }
 
     /**
-     * @return DecisionTable
+     * @return Input[]
      */
-    public function build()
+    public function getInputs()
     {
-        return new DecisionTable($this);
+        return $this->inputs;
     }
 
     /**
-     * @return DecisionTableBuilder
+     * @param Input[] $inputs
+     * @return DecisionTableBuilderInterface
      */
-    public static function getInstance()
+    public function setInputs($inputs)
     {
-        return new DecisionTableBuilder();
+        $this->inputs = $inputs;
+        return $this;
+    }
+
+    /**
+     * @param string $label
+     * @param string $name
+     * @param string $type
+     * @return DecisionTableBuilderInterface
+     */
+    public function addInput($label, $name, $type)
+    {
+        $this->inputs[] = new Input($label, $name, $type);
+        return $this;
+    }
+
+    /**
+     * @return Output[]
+     */
+    public function getOutputs()
+    {
+        return $this->outputs;
+    }
+
+    /**
+     * @param Output[] $outputs
+     * @return DecisionTableBuilderInterface
+     */
+    public function setOutputs($outputs)
+    {
+        $this->outputs = $outputs;
+        return $this;
+    }
+
+    /**
+     * @param string $label
+     * @param string $name
+     * @param string $type
+     * @return DecisionTableBuilderInterface
+     */
+    public function addOutput($label, $name, $type)
+    {
+        $this->outputs[] = new Output($label, $name, $type);
+        return $this;
     }
 }
