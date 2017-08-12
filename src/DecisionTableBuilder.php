@@ -5,6 +5,7 @@ namespace SteffenBrand\DmnDecisionTables;
 use SteffenBrand\DmnDecisionTables\Model\DecisionTable;
 use SteffenBrand\DmnDecisionTables\Model\Input;
 use SteffenBrand\DmnDecisionTables\Model\Output;
+use SteffenBrand\DmnDecisionTables\Model\Rule;
 
 class DecisionTableBuilder implements DecisionTableBuilderInterface
 {
@@ -37,6 +38,11 @@ class DecisionTableBuilder implements DecisionTableBuilderInterface
      * @var Output[]
      */
     private $outputs;
+
+    /**
+     * @var Rule[]
+     */
+    private $rules;
 
     /**
      * DecisionTableBuilder constructor.
@@ -188,6 +194,36 @@ class DecisionTableBuilder implements DecisionTableBuilderInterface
     public function addOutput($label, $name, $type)
     {
         $this->outputs[] = new Output($label, $name, $type);
+        return $this;
+    }
+
+    /**
+     * @return Rule[]
+     */
+    public function getRules()
+    {
+        return $this->rules;
+    }
+
+    /**
+     * @param Rule[] $rules
+     * @return DecisionTableBuilderInterface
+     */
+    public function setRules($rules)
+    {
+        $this->rules = $rules;
+        return $this;
+    }
+
+    /**
+     * @param array $inputEntries
+     * @param array $outputEntries
+     * @param string|null $description
+     * @return DecisionTableBuilderInterface
+     */
+    public function addRule($inputEntries, $outputEntries, $description = null)
+    {
+        $this->rules[] = new Rule($inputEntries, $outputEntries, $description);
         return $this;
     }
 }

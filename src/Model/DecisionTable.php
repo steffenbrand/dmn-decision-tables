@@ -6,7 +6,7 @@ use SteffenBrand\DmnDecisionTables\Constant\HitPolicy;
 use SteffenBrand\DmnDecisionTables\DecisionTableBuilder;
 use SteffenBrand\DmnDecisionTables\Exception\DmnConversionException;
 
-class DecisionTable implements DmnConvertible
+class DecisionTable implements DmnConvertibleInterface
 {
     /**
      * @var string
@@ -39,6 +39,11 @@ class DecisionTable implements DmnConvertible
     private $outputs;
 
     /**
+     * @var Rule[]
+     */
+    private $rules;
+
+    /**
      * DecisionTable constructor.
      * @param DecisionTableBuilder $builder
      */
@@ -50,6 +55,7 @@ class DecisionTable implements DmnConvertible
         $this->collectOperator = $builder->getCollectOperator();
         $this->inputs = $builder->getInputs();
         $this->outputs = $builder->getOutputs();
+        $this->rules = $builder->getRules();
     }
 
     /**
@@ -69,8 +75,9 @@ class DecisionTable implements DmnConvertible
             '<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">' .
                 '<decision id="' . $this->id . '" name="' . $this->name . '">' .
                     '<decisionTable id="' . uniqid('decisionTable') . '" ' . $this->getHitPolicy() . '>' .
-                        $this->getInputs() .
-                        $this->getOutputs() .
+                        $this->getXML($this->inputs) .
+                        $this->getXML($this->outputs) .
+                        $this->getXML($this->rules) .
                     '</decisionTable>' .
                 '</decision>' .
             '</definitions>'
@@ -87,40 +94,29 @@ class DecisionTable implements DmnConvertible
     /**
      * @return string
      */
-    private function getInputs()
-    {
-        $xml = '';
-
-        foreach ($this->inputs as $input) {
-            $xml .= $input->toDMN();
-        }
-
-        return $xml;
-    }
-
-    /**
-     * @return string
-     */
-    private function getOutputs()
-    {
-        $xml = '';
-
-        foreach ($this->outputs as $output) {
-            $xml .= $output->toDMN();
-        }
-
-        return $xml;
-    }
-
-    /**
-     * @return string
-     */
     private function getHitPolicy()
     {
         $xml = 'hitPolicy="' . $this->hitPolicy . '"';
 
         if (HitPolicy::COLLECT_POLICY === $this->hitPolicy) {
             $xml .= ' aggregation="' . $this->collectOperator . '"';
+        }
+
+        return $xml;
+    }
+
+    /**
+     * @param DmnConvertibleInterface[] $items
+     * @return string
+     */
+    private function getXML($items)
+    {
+        $xml = '';
+
+        if (empty($items) === false) {
+            foreach ($items as $item) {
+                $xml .= $item->toDMN();
+            }
         }
 
         return $xml;

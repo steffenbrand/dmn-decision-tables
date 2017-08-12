@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+    <decision id="decision" name="Dish">
+        <decisionTable id="decisionTable598f205814a43" hitPolicy="FIRST">
+            <input id="input598f205814b8b" label="Season">
+                <inputExpression id="inputExpression598f205814bb2" typeRef="string">
+                    <text>season</text>
+                </inputExpression>
+            </input>
+            <input id="input598f205814bde" label="How many guests">
+                <inputExpression id="inputExpression598f205814bf3" typeRef="integer">
+                    <text>guests</text>
+                </inputExpression>
+            </input>
+            <output id="output598f205814d24" label="Dish" name="dish" typeRef="string"/>
+            <rule id="rule598f205814e03">
+                <inputEntry id="inputEntry598f205814e3b">
+                    <text><![CDATA["Fall"]]></text>
+                </inputEntry>
+                <inputEntry id="inputEntry598f205814e4b">
+                    <text><![CDATA[<= 8]]></text>
+                </inputEntry>
+                <outputEntry id="inputEntry598f205814e61">
+                    <text><![CDATA["Spareribs"]]></text>
+                </outputEntry>
+            </rule>
+            <rule id="rule598f205814e74">
+                <inputEntry id="inputEntry598f205814e86">
+                    <text><![CDATA["Winter"]]></text>
+                </inputEntry>
+                <inputEntry id="inputEntry598f205814e92">
+                    <text><![CDATA[<= 8]]></text>
+                </inputEntry>
+                <outputEntry id="inputEntry598f205814ea2">
+                    <text><![CDATA["Roastbeef"]]></text>
+                </outputEntry>
+            </rule>
+            <rule id="rule598f205814eb0">
+                <inputEntry id="inputEntry598f205814ebf">
+                    <text><![CDATA["Spring"]]></text>
+                </inputEntry>
+                <inputEntry id="inputEntry598f205814ecc">
+                    <text><![CDATA[<= 4]]></text>
+                </inputEntry>
+                <outputEntry id="inputEntry598f205814ed9">
+                    <text><![CDATA["Dry Aged Gourmet Steak"]]></text>
+                </outputEntry>
+            </rule>
+            <rule id="rule598f205814eea">
+                <description>Save money</description>
+                <inputEntry id="inputEntry598f205814f01">
+                    <text><![CDATA["Spring"]]></text>
+                </inputEntry>
+                <inputEntry id="inputEntry598f205814f1a">
+                    <text><![CDATA[[5..8]]]></text>
+                </inputEntry>
+                <outputEntry id="inputEntry598f205814f45">
+                    <text><![CDATA["Steak"]]></text>
+                </outputEntry>
+            </rule>
+            <rule id="rule598f205814f83">
+                <description>Less effort</description>
+                <inputEntry id="inputEntry598f205814fb8">
+                    <text><![CDATA["Fall", "Winter", "Spring"]]></text>
+                </inputEntry>
+                <inputEntry id="inputEntry598f205814fc3">
+                    <text><![CDATA[> 8]]></text>
+                </inputEntry>
+                <outputEntry id="inputEntry598f205814fce">
+                    <text><![CDATA["Stew"]]></text>
+                </outputEntry>
+            </rule>
+            <rule id="rule598f205814ff1">
+                <description>Hey, why not!?</description>
+                <inputEntry id="inputEntry598f205814ffe">
+                    <text><![CDATA["Summer"]]></text>
+                </inputEntry>
+                <inputEntry id="inputEntry598f205815005">
+                    <text/>
+                </inputEntry>
+                <outputEntry id="inputEntry598f205815011">
+                    <text><![CDATA["Light Salad and a nice Steak"]]></text>
+                </outputEntry>
+            </rule>
+        </decisionTable>
+    </decision>
+</definitions>

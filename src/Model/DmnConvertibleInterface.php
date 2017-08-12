@@ -2,7 +2,7 @@
 
 namespace SteffenBrand\DmnDecisionTables\Model;
 
-interface DmnConvertible
+interface DmnConvertibleInterface
 {
     /**
      * @return string

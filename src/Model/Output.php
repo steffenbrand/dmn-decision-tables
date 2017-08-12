@@ -2,7 +2,7 @@
 
 namespace SteffenBrand\DmnDecisionTables\Model;
 
-class Output implements DmnConvertible
+class Output implements DmnConvertibleInterface
 {
     /**
      * @var string
