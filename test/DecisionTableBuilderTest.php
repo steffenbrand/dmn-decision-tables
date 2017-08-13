@@ -7,7 +7,9 @@ use SteffenBrand\DmnDecisionTables\Constant\HitPolicy;
 use SteffenBrand\DmnDecisionTables\Constant\VariableType;
 use SteffenBrand\DmnDecisionTables\DecisionTableBuilder;
 use SteffenBrand\DmnDecisionTables\Model\Input;
+use SteffenBrand\DmnDecisionTables\Model\InputEntry;
 use SteffenBrand\DmnDecisionTables\Model\Output;
+use SteffenBrand\DmnDecisionTables\Model\OutputEntry;
 
 class DecisionTableBuilderTest extends AbstractDmnDecisionTablesTest
 {
@@ -20,6 +22,11 @@ class DecisionTableBuilderTest extends AbstractDmnDecisionTablesTest
             ->addInput(new Input('Season', 'season', VariableType::STRING_TYPE))
             ->addInput(new Input('How many guests', 'guests', VariableType::INTEGER_TYPE))
             ->addOutput(new Output('Dish', 'dish', VariableType::STRING_TYPE))
+            ->addRule(
+                [new InputEntry('"Nothing"'), new InputEntry(null)],
+                [new OutputEntry(null)],
+                'Hey, why not!?'
+            )
             ->build();
 
         libxml_use_internal_errors(true);

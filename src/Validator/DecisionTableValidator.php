@@ -75,21 +75,21 @@ class DecisionTableValidator implements DecisionTableValidatorInterface
     private function validateName()
     {
         if (empty($this->builder->getName()) === true) {
-            $this->errors[] = 'name of decision table must not be empty';
+            $this->errors[] = 'name of decision table is required';
         }
     }
 
     private function validateDefinitionKey()
     {
         if (empty($this->builder->getDefinitionKey()) === true) {
-            $this->errors[] = 'definition key of decision table must not be empty';
+            $this->errors[] = 'definition key of decision table is required';
         }
     }
 
     private function validateHitPolicy()
     {
         if (empty($this->builder->getHitPolicy()) === true) {
-            $this->errors[] = 'hit policy of decision table must not be empty';
+            $this->errors[] = 'hit policy of decision table is required';
         } else if (in_array($this->builder->getHitPolicy(), HitPolicy::ALLOWED_HIT_POLICIES) === false) {
             $this->errors[] = sprintf(
                 'hit policy of decision table must be one of: %s',
@@ -121,15 +121,15 @@ class DecisionTableValidator implements DecisionTableValidatorInterface
         $i = 1;
         foreach ($this->builder->getInputs() as $input) {
             if (empty($input->getLabel()) === true) {
-                $this->errors[] = sprintf('input no. %s: label must not be empty', (string) $i);
+                $this->errors[] = sprintf('input no. %s: label is required', (string) $i);
             }
             
             if (empty($input->getName()) === true) {
-                $this->errors[] = sprintf('input no. %s: name must not be empty', (string) $i);
+                $this->errors[] = sprintf('input no. %s: name is required', (string) $i);
             }
             
             if (empty($input->getType()) === true) {
-                $this->errors[] = sprintf('input no. %s: type must not be empty', (string) $i);
+                $this->errors[] = sprintf('input no. %s: type is required', (string) $i);
             } else if (in_array($input->getType(), VariableType::ALLOWED_VARIABLE_TYPES) === false) {
                 $this->errors[] = sprintf(
                     'input no. %s: type must be one of: %s',
@@ -152,15 +152,15 @@ class DecisionTableValidator implements DecisionTableValidatorInterface
         $i = 1;
         foreach ($this->builder->getOutputs() as $output) {
             if (empty($output->getLabel()) === true) {
-                $this->errors[] = sprintf('output no. %s: label must not be empty', (string) $i);
+                $this->errors[] = sprintf('output no. %s: label is required', (string) $i);
             }
             
             if (empty($output->getName()) === true) {
-                $this->errors[] = sprintf('output no. %s: name must not be empty', (string) $i);
+                $this->errors[] = sprintf('output no. %s: name is required', (string) $i);
             }
             
             if (empty($output->getType()) === true) {
-                $this->errors[] = sprintf('output no. %s: type must not be empty', (string) $i);
+                $this->errors[] = sprintf('output no. %s: type is required', (string) $i);
             } else if (in_array($output->getType(), VariableType::ALLOWED_VARIABLE_TYPES) === false) {
                 $this->errors[] = sprintf(
                     'output no. %s: type must be one of: %s',
@@ -207,7 +207,7 @@ class DecisionTableValidator implements DecisionTableValidatorInterface
         foreach ($rule->getInputEntries() as $inputEntry) {
             if (empty($inputEntry->getExpressionLanguage()) === true) {
                 $this->errors[] = sprintf(
-                    'rule no. %s, input entry no. %s: expression language must not be empty',
+                    'rule no. %s, input entry no. %s: expression language is required',
                     (string) $i,
                     (string) $k
                 );
@@ -239,7 +239,7 @@ class DecisionTableValidator implements DecisionTableValidatorInterface
         foreach ($rule->getOutputEntries() as $outputEntry) {
             if (empty($outputEntry->getExpressionLanguage()) === true) {
                 $this->errors[] = sprintf(
-                    'rule no. %s, output entry no. %s: expression language must not be empty',
+                    'rule no. %s, output entry no. %s: expression language is required',
                     (string) $i,
                     (string) $k
                 );
