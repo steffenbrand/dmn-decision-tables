@@ -22,7 +22,7 @@ abstract class AbstractDmnDecisionTablesTest extends \PHPUnit_Framework_TestCase
         $decisionTable = DecisionTableBuilder::getInstance()
             ->setName('Dish')
             ->setDefinitionKey('decision')
-            ->setHitPolicy(HitPolicy::FIRST_POLICY)
+            ->setHitPolicy(HitPolicy::UNIQUE_POLICY)
             ->addInput(new Input('Season', 'season', VariableType::STRING_TYPE))
             ->addInput(new Input('How many guests', 'guests', VariableType::INTEGER_TYPE))
             ->addOutput(new Output('Dish', 'dish', VariableType::STRING_TYPE))
