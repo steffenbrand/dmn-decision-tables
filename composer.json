@@ -4,7 +4,8 @@
     "keywords": [
         "DMN",
         "BPMN",
-        "Decision Table"
+        "Decision Table",
+        "Camunda"
     ],
     "homepage": "https://github.com/steffenbrand/dmn-decision-tables",
     "license": "MIT",
