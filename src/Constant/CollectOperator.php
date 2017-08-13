@@ -10,7 +10,7 @@ class CollectOperator
     const MAX_OPERATOR = 'MAX';
     const COUNT_OPERATOR = 'COUNT';
 
-    const ALLOWED_VARIABLE_TYPES = [
+    const ALLOWED_COLLECT_OPERATORS = [
         self::LIST_OPERATOR,
         self::SUM_OPERATOR,
         self::MIN_OPERATOR,

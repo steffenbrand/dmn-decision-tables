@@ -8,6 +8,8 @@ use SteffenBrand\DmnDecisionTables\Exception\DmnConversionException;
 
 class DecisionTable implements DmnConvertibleInterface
 {
+    use ArrayToDmnTrait;
+
     /**
      * @var string
      */
@@ -75,9 +77,9 @@ class DecisionTable implements DmnConvertibleInterface
             '<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">' .
                 '<decision id="' . $this->id . '" name="' . $this->name . '">' .
                     '<decisionTable id="' . uniqid('decisionTable') . '" ' . $this->getHitPolicy() . '>' .
-                        $this->getXML($this->inputs) .
-                        $this->getXML($this->outputs) .
-                        $this->getXML($this->rules) .
+                        $this->getDmnFromArray($this->inputs) .
+                        $this->getDmnFromArray($this->outputs) .
+                        $this->getDmnFromArray($this->rules) .
                     '</decisionTable>' .
                 '</decision>' .
             '</definitions>'
@@ -100,23 +102,6 @@ class DecisionTable implements DmnConvertibleInterface
 
         if (HitPolicy::COLLECT_POLICY === $this->hitPolicy) {
             $xml .= ' aggregation="' . $this->collectOperator . '"';
-        }
-
-        return $xml;
-    }
-
-    /**
-     * @param DmnConvertibleInterface[] $items
-     * @return string
-     */
-    private function getXML($items)
-    {
-        $xml = '';
-
-        if (empty($items) === false) {
-            foreach ($items as $item) {
-                $xml .= $item->toDMN();
-            }
         }
 
         return $xml;

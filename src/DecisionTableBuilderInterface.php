@@ -80,12 +80,10 @@ interface DecisionTableBuilderInterface
     public function setInputs($inputs);
 
     /**
-     * @param string $label
-     * @param string $name
-     * @param string $type
+     * @param Input $input
      * @return DecisionTableBuilderInterface
      */
-    public function addInput($label, $name, $type);
+    public function addInput($input);
 
     /**
      * @return Output[]
@@ -99,12 +97,10 @@ interface DecisionTableBuilderInterface
     public function setOutputs($outputs);
 
     /**
-     * @param string $label
-     * @param string $name
-     * @param string $type
+     * @param Output $output
      * @return DecisionTableBuilderInterface
      */
-    public function addOutput($label, $name, $type);
+    public function addOutput($output);
 
     /**
      * @return Rule[]

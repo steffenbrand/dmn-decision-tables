@@ -12,7 +12,7 @@ class HitPolicy
     const RULE_ORDER_POLICY = 'RULE ORDER';
     const OUTPUT_ORDER_POLICY = 'OUTPUT ORDER';
 
-    const ALLOWED_VARIABLE_TYPES = [
+    const ALLOWED_HIT_POLICIES = [
         self::UNIQUE_POLICY,
         self::FIRST_POLICY,
         self::PRIORITY_POLICY,

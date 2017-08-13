@@ -156,14 +156,12 @@ class DecisionTableBuilder implements DecisionTableBuilderInterface
     }
 
     /**
-     * @param string $label
-     * @param string $name
-     * @param string $type
+     * @param Input $input
      * @return DecisionTableBuilderInterface
      */
-    public function addInput($label, $name, $type)
+    public function addInput($input)
     {
-        $this->inputs[] = new Input($label, $name, $type);
+        $this->inputs[] = $input;
         return $this;
     }
 
@@ -186,14 +184,12 @@ class DecisionTableBuilder implements DecisionTableBuilderInterface
     }
 
     /**
-     * @param string $label
-     * @param string $name
-     * @param string $type
+     * @param Output $output
      * @return DecisionTableBuilderInterface
      */
-    public function addOutput($label, $name, $type)
+    public function addOutput($output)
     {
-        $this->outputs[] = new Output($label, $name, $type);
+        $this->outputs[] = $output;
         return $this;
     }
 
