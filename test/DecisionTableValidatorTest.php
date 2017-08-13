@@ -160,7 +160,6 @@ class DmnDecisionTablesTest extends AbstractDmnDecisionTablesTest
         $validator = new DecisionTableValidator($builder);
         $validator->validate();
         $errors = $validator->getErrors();
-        print_r($errors);
 
         $this->assertEquals(12, count($errors));
         $this->assertEquals('collect operator must be one of: LIST, SUM, MIN, MAX, COUNT', $errors[0]);
