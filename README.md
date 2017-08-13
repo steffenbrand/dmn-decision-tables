@@ -7,6 +7,9 @@
 # DMN Decision Tables
 PHP library to programmatically create DMN decision tables
 
+* [DMN Decision Tables on Packagist](https://packagist.org/packages/steffenbrand/dmn-decision-tables)
+* [DMN Decision Tables on GitHub](https://github.com/steffenbrand/dmn-decision-tables)
+
 ## Limitations
 
 - Generated tables have been tested with [Camunda BPM platform](https://camunda.com/) and [Camunda Cloud](https://dmn.camunda.cloud/), but have __NOT__ been tested
