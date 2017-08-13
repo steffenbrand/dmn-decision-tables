@@ -16,6 +16,8 @@ interface DecisionTableBuilderInterface
     public function __construct();
 
     /**
+     * Builds a DecisionTable instance.
+     *
      * @param bool $validation
      * @param DecisionTableValidatorInterface
      * @return DecisionTable
@@ -24,6 +26,8 @@ interface DecisionTableBuilderInterface
     public function build($validation = true, $decisionTableValidator = null);
 
     /**
+     * Returns an instance of DecisionTableBuilderInterface.
+     *
      * @return DecisionTableBuilderInterface
      */
     public static function getInstance();

@@ -2,6 +2,10 @@
 
 namespace SteffenBrand\DmnDecisionTables\Exception;
 
+/**
+ * Class DmnConversionException
+ * @package SteffenBrand\DmnDecisionTables\Exception
+ */
 class DmnConversionException extends \UnexpectedValueException
 {
     /**

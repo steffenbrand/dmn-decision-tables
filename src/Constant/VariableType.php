@@ -2,6 +2,10 @@
 
 namespace SteffenBrand\DmnDecisionTables\Constant;
 
+/**
+ * Class VariableType
+ * @package SteffenBrand\DmnDecisionTables\Constant
+ */
 class VariableType
 {
     const STRING_TYPE = 'string';

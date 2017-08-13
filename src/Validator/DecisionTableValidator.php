@@ -9,6 +9,10 @@ use SteffenBrand\DmnDecisionTables\Constant\VariableType;
 use SteffenBrand\DmnDecisionTables\DecisionTableBuilderInterface;
 use SteffenBrand\DmnDecisionTables\Model\Rule;
 
+/**
+ * Class DecisionTableValidator
+ * @package SteffenBrand\DmnDecisionTables\Validator
+ */
 class DecisionTableValidator implements DecisionTableValidatorInterface
 {
     /**
@@ -38,6 +42,8 @@ class DecisionTableValidator implements DecisionTableValidatorInterface
     }
 
     /**
+     * Validates a DecisionTableBuilder instance.
+     *
      * @return DecisionTableValidator
      */
     public function validate()
@@ -72,6 +78,9 @@ class DecisionTableValidator implements DecisionTableValidatorInterface
         return $this->errors;
     }
 
+    /**
+     * @return void
+     */
     private function validateName()
     {
         if (empty($this->builder->getName()) === true) {
@@ -79,6 +88,9 @@ class DecisionTableValidator implements DecisionTableValidatorInterface
         }
     }
 
+    /**
+     * @return void
+     */
     private function validateDefinitionKey()
     {
         if (empty($this->builder->getDefinitionKey()) === true) {
@@ -86,6 +98,9 @@ class DecisionTableValidator implements DecisionTableValidatorInterface
         }
     }
 
+    /**
+     * @return void
+     */
     private function validateHitPolicy()
     {
         if (empty($this->builder->getHitPolicy()) === true) {
@@ -111,6 +126,9 @@ class DecisionTableValidator implements DecisionTableValidatorInterface
         }
     }
 
+    /**
+     * @return void
+     */
     private function validateInputs()
     {
         if (empty($this->builder->getInputs()) === true) {
@@ -142,6 +160,9 @@ class DecisionTableValidator implements DecisionTableValidatorInterface
         }
     }
 
+    /**
+     * @return void
+     */
     private function validateOutputs()
     {
         if (empty($this->builder->getOutputs()) === true) {
@@ -173,6 +194,9 @@ class DecisionTableValidator implements DecisionTableValidatorInterface
         }
     }
 
+    /**
+     * @return void
+     */
     private function validateRules()
     {
         if (empty($this->builder->getRules()) === true) {
@@ -195,6 +219,7 @@ class DecisionTableValidator implements DecisionTableValidatorInterface
     /**
      * @param Rule $rule
      * @param $i
+     * @return void
      */
     private function validateInputEntries($rule, $i)
     {
@@ -227,6 +252,7 @@ class DecisionTableValidator implements DecisionTableValidatorInterface
     /**
      * @param Rule $rule
      * @param $i
+     * @return void
      */
     private function validateOutputEntries($rule, $i)
     {

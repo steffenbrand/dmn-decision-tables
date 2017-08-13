@@ -2,6 +2,10 @@
 
 namespace SteffenBrand\DmnDecisionTables\Constant;
 
+/**
+ * Class HitPolicy
+ * @package SteffenBrand\DmnDecisionTables\Constant
+ */
 class HitPolicy
 {
     const UNIQUE_POLICY = 'UNIQUE';

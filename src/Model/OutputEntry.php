@@ -4,6 +4,10 @@ namespace SteffenBrand\DmnDecisionTables\Model;
 
 use SteffenBrand\DmnDecisionTables\Constant\ExpressionLanguage;
 
+/**
+ * Class OutputEntry
+ * @package SteffenBrand\DmnDecisionTables\Model
+ */
 class OutputEntry implements DmnConvertibleInterface
 {
     /**
@@ -28,6 +32,8 @@ class OutputEntry implements DmnConvertibleInterface
     }
 
     /**
+     * Returns an XML representation of an output entry.
+     *
      * @return string
      */
     public function toDMN()

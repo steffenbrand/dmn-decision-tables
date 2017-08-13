@@ -6,6 +6,10 @@ use SteffenBrand\DmnDecisionTables\Constant\HitPolicy;
 use SteffenBrand\DmnDecisionTables\DecisionTableBuilder;
 use SteffenBrand\DmnDecisionTables\Exception\DmnConversionException;
 
+/**
+ * Class DecisionTable
+ * @package SteffenBrand\DmnDecisionTables\Model
+ */
 class DecisionTable implements DmnConvertibleInterface
 {
     use ArrayToDmnTrait;
@@ -61,6 +65,8 @@ class DecisionTable implements DmnConvertibleInterface
     }
 
     /**
+     * Returns an XML representation of the decision table.
+     *
      * @return string
      * @throws DmnConversionException
      */
@@ -72,6 +78,8 @@ class DecisionTable implements DmnConvertibleInterface
     }
 
     /**
+     * Saves decision table as .DMN-file to filesystem.
+     *
      * @param $fileNameAndPath
      * @return int
      * @throws DmnConversionException
@@ -84,6 +92,8 @@ class DecisionTable implements DmnConvertibleInterface
     }
 
     /**
+     * Returns a DOMDocument representation of the decision table.
+     *
      * @return \DOMDocument
      * @throws DmnConversionException
      */
@@ -117,6 +127,8 @@ class DecisionTable implements DmnConvertibleInterface
     }
 
     /**
+     * Returns a hit policy xml string and adds aggregation in case of collect hit policy.
+     *
      * @return string
      */
     private function getHitPolicy()

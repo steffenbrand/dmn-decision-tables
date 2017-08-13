@@ -2,6 +2,10 @@
 
 namespace SteffenBrand\DmnDecisionTables\Constant;
 
+/**
+ * Class ExpressionLanguage
+ * @package SteffenBrand\DmnDecisionTables\Constant
+ */
 class ExpressionLanguage
 {
     const FEEL_LANGUAGE = 'feel';

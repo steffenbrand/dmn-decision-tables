@@ -2,6 +2,10 @@
 
 namespace SteffenBrand\DmnDecisionTables\Constant;
 
+/**
+ * Class CollectOperator
+ * @package SteffenBrand\DmnDecisionTables\Constant
+ */
 class CollectOperator
 {
     const LIST_OPERATOR = 'LIST';

@@ -2,6 +2,10 @@
 
 namespace SteffenBrand\DmnDecisionTables\Model;
 
+/**
+ * Class Rule
+ * @package SteffenBrand\DmnDecisionTables\Model
+ */
 class Rule implements DmnConvertibleInterface
 {
     use ArrayToDmnTrait;
@@ -36,6 +40,8 @@ class Rule implements DmnConvertibleInterface
     }
 
     /**
+     * Returns an XML representation of a rule.
+     *
      * @return string
      */
     public function toDMN()

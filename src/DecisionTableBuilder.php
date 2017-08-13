@@ -9,6 +9,10 @@ use SteffenBrand\DmnDecisionTables\Model\Output;
 use SteffenBrand\DmnDecisionTables\Model\Rule;
 use SteffenBrand\DmnDecisionTables\Validator\DecisionTableValidator;
 
+/**
+ * Class DecisionTableBuilder
+ * @package SteffenBrand\DmnDecisionTables
+ */
 class DecisionTableBuilder implements DecisionTableBuilderInterface
 {
     /**
@@ -52,6 +56,8 @@ class DecisionTableBuilder implements DecisionTableBuilderInterface
     public function __construct() {}
 
     /**
+     * Builds a DecisionTable instance.
+     *
      * @param bool $validation
      * @param DecisionTableValidatorInterface
      * @return DecisionTable
@@ -75,6 +81,8 @@ class DecisionTableBuilder implements DecisionTableBuilderInterface
     }
 
     /**
+     * Returns a DecisionTableBuilder instance.
+     *
      * @return DecisionTableBuilder
      */
     public static function getInstance()
