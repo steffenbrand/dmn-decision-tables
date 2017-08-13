@@ -38,13 +38,13 @@ interface DecisionTableBuilderInterface
     /**
      * @return string
      */
-    public function getId();
+    public function getDefinitionKey();
 
     /**
-     * @param string $id
+     * @param string $definitionKey
      * @return DecisionTableBuilderInterface
      */
-    public function setId($id);
+    public function setDefinitionKey($definitionKey);
 
     /**
      * @return string

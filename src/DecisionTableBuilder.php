@@ -17,7 +17,7 @@ class DecisionTableBuilder implements DecisionTableBuilderInterface
     /**
      * @var string
      */
-    private $id;
+    private $definitionKey;
 
     /**
      * @var string
@@ -86,18 +86,18 @@ class DecisionTableBuilder implements DecisionTableBuilderInterface
     /**
      * @return string
      */
-    public function getId()
+    public function getDefinitionKey()
     {
-        return $this->id;
+        return $this->definitionKey;
     }
 
     /**
-     * @param string $id
+     * @param string $definitionKey
      * @return DecisionTableBuilderInterface
      */
-    public function setId($id)
+    public function setDefinitionKey($definitionKey)
     {
-        $this->id = $id;
+        $this->definitionKey = $definitionKey;
         return $this;
     }
 

@@ -35,7 +35,8 @@ class OutputEntry implements DmnConvertibleInterface
         $xml = '';
 
         if (isset($this->expression) === false || trim($this->expression) === '') {
-            $xml .= '<outputEntry id="' . uniqid('outputEntry') . '"><text/></outputEntry>';
+            $xml .=
+                '<outputEntry id="' . uniqid('outputEntry') . '"><text/></outputEntry>';
         } else {
             $xml .=
                 '<outputEntry id="' . uniqid('outputEntry') . '" expressionLanguage="' . $this->expressionLanguage . '">' .

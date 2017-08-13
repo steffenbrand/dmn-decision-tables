@@ -8,6 +8,7 @@ use SteffenBrand\DmnDecisionTables\Constant\ExpressionLanguage;
 use SteffenBrand\DmnDecisionTables\Constant\HitPolicy;
 use SteffenBrand\DmnDecisionTables\Constant\VariableType;
 use SteffenBrand\DmnDecisionTables\DecisionTableBuilder;
+use SteffenBrand\DmnDecisionTables\Model\DecisionTable;
 use SteffenBrand\DmnDecisionTables\Model\Input;
 use SteffenBrand\DmnDecisionTables\Model\InputEntry;
 use SteffenBrand\DmnDecisionTables\Model\Output;
@@ -19,7 +20,7 @@ class DmnDecisionTablesTest extends PHPUnit_Framework_TestCase
     {
         $decisionTable = DecisionTableBuilder::getInstance()
             ->setName('Dish')
-            ->setId('decision')
+            ->setDefinitionKey('decision')
             ->setHitPolicy(HitPolicy::FIRST_POLICY)
             ->addInput(new Input('Season', 'season', VariableType::STRING_TYPE))
             ->addInput(new Input('How many guests', 'guests', VariableType::INTEGER_TYPE))
@@ -39,7 +40,7 @@ class DmnDecisionTablesTest extends PHPUnit_Framework_TestCase
     {
         $decisionTable = DecisionTableBuilder::getInstance()
             ->setName('Dish')
-            ->setId('decision')
+            ->setDefinitionKey('decision')
             ->setHitPolicy(HitPolicy::FIRST_POLICY)
             ->addInput(new Input('Season', 'season', VariableType::STRING_TYPE))
             ->addInput(new Input('How many guests', 'guests', VariableType::INTEGER_TYPE))
@@ -55,11 +56,11 @@ class DmnDecisionTablesTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(\SimpleXMLElement::class, $xmlElement);
     }
 
-    public function testXmlConversionWithHitPolicyCollectAndCollectOperator()
+    public function testXmlConversionWithCollectHitPolicyCollectAndCollectOperator()
     {
         $decisionTable = DecisionTableBuilder::getInstance()
             ->setName('Dish')
-            ->setId('decision')
+            ->setDefinitionKey('decision')
             ->setHitPolicy(HitPolicy::COLLECT_POLICY)
             ->setCollectOperator(CollectOperator::LIST_OPERATOR)
             ->addInput(new Input('Season', 'season', VariableType::STRING_TYPE))
@@ -78,9 +79,48 @@ class DmnDecisionTablesTest extends PHPUnit_Framework_TestCase
 
     public function testXmlConversionWithRules()
     {
+        $decisionTable = $this->getDishExampleDecisionTable();
+
+        libxml_use_internal_errors(true);
+        $xmlElement = simplexml_load_string($decisionTable->toDMN());
+        $errors = libxml_get_errors();
+        libxml_clear_errors();
+
+        $this->assertEmpty($errors);
+        $this->assertInstanceOf(\SimpleXMLElement::class, $xmlElement);
+    }
+
+    public function testSaveDmnFile()
+    {
+        $decisionTable = $this->getDishExampleDecisionTable();
+        $bytesWritten = $decisionTable->saveDMN(__DIR__ . '/../resources/generated_with_dmn_decision_tables.dmn');
+
+        $this->assertEquals(3849, $bytesWritten);
+    }
+
+    /**
+     * @expectedException \SteffenBrand\DmnDecisionTables\Exception\DmnConversionException
+     */
+    public function testXmlConversionWithInvalidXmlStringThrowsException()
+    {
+        DecisionTableBuilder::getInstance()
+            ->setName('Dish " DOUBLE QUOTES WILL BREAK IT')
+            ->setDefinitionKey('decision')
+            ->addInput(new Input('Season', 'season', VariableType::STRING_TYPE))
+            ->addInput(new Input('How many guests', 'guests', VariableType::INTEGER_TYPE))
+            ->addOutput(new Output('Dish', 'dish', VariableType::STRING_TYPE))
+            ->build()
+            ->toDMN();
+    }
+
+    /**
+     * @return DecisionTable
+     */
+    private function getDishExampleDecisionTable()
+    {
         $decisionTable = DecisionTableBuilder::getInstance()
             ->setName('Dish')
-            ->setId('decision')
+            ->setDefinitionKey('decision')
             ->setHitPolicy(HitPolicy::FIRST_POLICY)
             ->addInput(new Input('Season', 'season', VariableType::STRING_TYPE))
             ->addInput(new Input('How many guests', 'guests', VariableType::INTEGER_TYPE))
@@ -117,27 +157,6 @@ class DmnDecisionTablesTest extends PHPUnit_Framework_TestCase
             )
             ->build();
 
-        libxml_use_internal_errors(true);
-        $xmlElement = simplexml_load_string($decisionTable->toDMN());
-        $errors = libxml_get_errors();
-        libxml_clear_errors();
-
-        $this->assertEmpty($errors);
-        $this->assertInstanceOf(\SimpleXMLElement::class, $xmlElement);
-    }
-
-    /**
-     * @expectedException \SteffenBrand\DmnDecisionTables\Exception\DmnConversionException
-     */
-    public function testXmlConversionWithInvalidXmlStringThrowsException()
-    {
-        DecisionTableBuilder::getInstance()
-            ->setName('Dish " DOUBLE QUOTES WILL BREAK IT')
-            ->setId('decision')
-            ->addInput(new Input('Season', 'season', VariableType::STRING_TYPE))
-            ->addInput(new Input('How many guests', 'guests', VariableType::INTEGER_TYPE))
-            ->addOutput(new Output('Dish', 'dish', VariableType::STRING_TYPE))
-            ->build()
-            ->toDMN();
+        return $decisionTable;
     }
 }

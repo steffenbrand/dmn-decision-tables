@@ -18,7 +18,7 @@ class DecisionTable implements DmnConvertibleInterface
     /**
      * @var string
      */
-    private $id;
+    private $definitionKey;
 
     /**
      * @var string
@@ -52,7 +52,7 @@ class DecisionTable implements DmnConvertibleInterface
     public function __construct($builder)
     {
         $this->name = $builder->getName();
-        $this->id = $builder->getId();
+        $this->definitionKey = $builder->getDefinitionKey();
         $this->hitPolicy = $builder->getHitPolicy();
         $this->collectOperator = $builder->getCollectOperator();
         $this->inputs = $builder->getInputs();
@@ -66,6 +66,29 @@ class DecisionTable implements DmnConvertibleInterface
      */
     public function toDMN()
     {
+        $dom = $this->getDomDocument();
+
+        return $dom->saveXML();
+    }
+
+    /**
+     * @param $fileNameAndPath
+     * @return int
+     * @throws DmnConversionException
+     */
+    public function saveDMN($fileNameAndPath)
+    {
+        $dom = $this->getDomDocument();
+
+        return $dom->save($fileNameAndPath);
+    }
+
+    /**
+     * @return \DOMDocument
+     * @throws DmnConversionException
+     */
+    private function getDomDocument()
+    {
         libxml_use_internal_errors(true);
 
         $dom = new \DOMDocument();
@@ -75,7 +98,7 @@ class DecisionTable implements DmnConvertibleInterface
         $dom->loadXML(
             '<?xml version="1.0" encoding="UTF-8"?>' .
             '<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">' .
-                '<decision id="' . $this->id . '" name="' . $this->name . '">' .
+                '<decision id="' . $this->definitionKey . '" name="' . $this->name . '">' .
                     '<decisionTable id="' . uniqid('decisionTable') . '" ' . $this->getHitPolicy() . '>' .
                         $this->getDmnFromArray($this->inputs) .
                         $this->getDmnFromArray($this->outputs) .
@@ -90,7 +113,7 @@ class DecisionTable implements DmnConvertibleInterface
             throw new DmnConversionException($errors);
         }
 
-        return $dom->saveXML();
+        return $dom;
     }
 
     /**

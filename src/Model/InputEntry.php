@@ -35,7 +35,8 @@ class InputEntry implements DmnConvertibleInterface
         $xml = '';
 
         if (isset($this->expression) === false || trim($this->expression) === '') {
-            $xml .= '<inputEntry id="' . uniqid('inputEntry') . '"><text/></inputEntry>';
+            $xml .=
+                '<inputEntry id="' . uniqid('inputEntry') . '"><text/></inputEntry>';
         } else {
             $xml .=
                 '<inputEntry id="' . uniqid('inputEntry') . '" expressionLanguage="' . $this->expressionLanguage . '">' .
