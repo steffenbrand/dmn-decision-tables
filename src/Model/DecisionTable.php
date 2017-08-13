@@ -76,7 +76,7 @@ class DecisionTable implements DmnConvertibleInterface
      * @return int
      * @throws DmnConversionException
      */
-    public function saveDMN($fileNameAndPath)
+    public function saveFile($fileNameAndPath)
     {
         $dom = $this->getDomDocument();
 

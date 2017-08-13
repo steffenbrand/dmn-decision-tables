@@ -93,7 +93,7 @@ class DmnDecisionTablesTest extends PHPUnit_Framework_TestCase
     public function testSaveDmnFile()
     {
         $decisionTable = $this->getDishExampleDecisionTable();
-        $bytesWritten = $decisionTable->saveDMN(__DIR__ . '/../resources/generated_with_dmn_decision_tables.dmn');
+        $bytesWritten = $decisionTable->saveFile(__DIR__ . '/../resources/generated_with_dmn_decision_tables.dmn');
 
         $this->assertEquals(3849, $bytesWritten);
     }
