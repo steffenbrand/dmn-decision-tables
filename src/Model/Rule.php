@@ -42,7 +42,7 @@ class Rule implements DmnConvertibleInterface
     {
         return
             '<rule id="' . uniqid('rule') . '">' .
-                $this->getDescription() .
+                $this->getDescriptionXml() .
                 $this->getDmnFromArray($this->inputEntries) .
                 $this->getDmnFromArray($this->outputEntries) .
             '</rule>';
@@ -51,11 +51,35 @@ class Rule implements DmnConvertibleInterface
     /**
      * @return string
      */
-    private function getDescription()
+    private function getDescriptionXml()
     {
-        if (null === $this->description) {
+        if (isset($this->description) === false || trim($this->description) === '') {
             return '';
         }
         return '<description>' . $this->description . '</description>';
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return InputEntry[]
+     */
+    public function getInputEntries()
+    {
+        return $this->inputEntries;
+    }
+
+    /**
+     * @return OutputEntry[]
+     */
+    public function getOutputEntries()
+    {
+        return $this->outputEntries;
     }
 }

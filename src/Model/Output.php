@@ -39,4 +39,28 @@ class Output implements DmnConvertibleInterface
     {
         return '<output id="' . uniqid('output') . '" label="' . $this->label . '" name="' . $this->name . '" typeRef="' . $this->type . '"/>';
     }
+
+    /**
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
 }

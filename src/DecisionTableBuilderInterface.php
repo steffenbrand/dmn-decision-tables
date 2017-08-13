@@ -2,6 +2,7 @@
 
 namespace SteffenBrand\DmnDecisionTables;
 
+use SteffenBrand\DmnDecisionTables\Exception\DmnValidationException;
 use SteffenBrand\DmnDecisionTables\Model\DecisionTable;
 use SteffenBrand\DmnDecisionTables\Model\Input;
 use SteffenBrand\DmnDecisionTables\Model\Output;
@@ -15,9 +16,12 @@ interface DecisionTableBuilderInterface
     public function __construct();
 
     /**
+     * @param bool $validation
+     * @param DecisionTableValidatorInterface
      * @return DecisionTable
+     * @throws DmnValidationException
      */
-    public function build();
+    public function build($validation = true, $decisionTableValidator = null);
 
     /**
      * @return DecisionTableBuilderInterface

@@ -46,4 +46,20 @@ class InputEntry implements DmnConvertibleInterface
 
         return $xml;
     }
+
+    /**
+     * @return string
+     */
+    public function getExpression()
+    {
+        return $this->expression;
+    }
+
+    /**
+     * @return string
+     */
+    public function getExpressionLanguage()
+    {
+        return $this->expressionLanguage;
+    }
 }

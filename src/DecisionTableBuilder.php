@@ -2,10 +2,12 @@
 
 namespace SteffenBrand\DmnDecisionTables;
 
+use SteffenBrand\DmnDecisionTables\Exception\DmnValidationException;
 use SteffenBrand\DmnDecisionTables\Model\DecisionTable;
 use SteffenBrand\DmnDecisionTables\Model\Input;
 use SteffenBrand\DmnDecisionTables\Model\Output;
 use SteffenBrand\DmnDecisionTables\Model\Rule;
+use SteffenBrand\DmnDecisionTables\Validator\DecisionTableValidator;
 
 class DecisionTableBuilder implements DecisionTableBuilderInterface
 {
@@ -50,10 +52,25 @@ class DecisionTableBuilder implements DecisionTableBuilderInterface
     public function __construct() {}
 
     /**
+     * @param bool $validation
+     * @param DecisionTableValidatorInterface
      * @return DecisionTable
+     * @throws DmnValidationException
      */
-    public function build()
+    public function build($validation = true, $decisionTableValidator = null)
     {
+        if (true === $validation) {
+            $validator = $decisionTableValidator;
+            if (null === $decisionTableValidator) {
+                $validator = new DecisionTableValidator($this);
+            }
+
+            $validator->validate();
+            if (false === $validator->isValid()) {
+                throw new DmnValidationException($validator->getErrors());
+            }
+        }
+
         return new DecisionTable($this);
     }
 
