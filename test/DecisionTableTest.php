@@ -15,7 +15,7 @@ class DecisionTableTest extends AbstractDmnDecisionTablesTest
         $decisionTable = $this->getDishExampleDecisionTable();
         $bytesWritten = $decisionTable->saveFile(__DIR__ . '/../resources/generated_with_dmn_decision_tables.dmn');
 
-        $this->assertEquals(3850, $bytesWritten);
+        $this->assertEquals(3848, $bytesWritten);
     }
 
     /**
