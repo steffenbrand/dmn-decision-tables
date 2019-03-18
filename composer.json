@@ -10,7 +10,6 @@
     "homepage": "https://github.com/steffenbrand/dmn-decision-tables",
     "license": "MIT",
     "type": "library",
-    "version": "1.0.0",
     "authors": [
         {
             "name": "Steffen Brand",
